@@ -1,20 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package demon_slayer_game;
 
-/**
- *
- * @author christian.torresgav
- */
-public class DEMON_SLAYER_GAME {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
 
-    /**
-     * @param args the command line arguments
-     */
+public class DEMON_SLAYER_GAME {
+    static Scanner sc = new Scanner(System.in);
+    static String playerName;
+    static int playerHealth;
+    static int enemyHealth;
+    static int totalEnemyDamage;
+    static int playerKills;
+    static int totalPlayerKills = 0;
+    static String[] enemyNameList = { "Muzan Kibutsuji", "Akaza", "Doma", "Gyutaro", "Daki", "Rui", "Enmu",
+            "Swamp demon", "Yahaba", "Susamaru", "Nakime", "Kyogai", "Erisu" };
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+        
     }
     
 }
