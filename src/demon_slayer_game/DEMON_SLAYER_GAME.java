@@ -28,6 +28,7 @@ public class DEMON_SLAYER_GAME {
     static Scanner sc = new Scanner(System.in);
      
     public static void main(String[] args) {
+        clearScreen();
         GAMEMENU();
     }
     
@@ -49,13 +50,14 @@ public class DEMON_SLAYER_GAME {
                 ATTACK(1.0, 1.2);
                 break;
             } else if (input.equals("2")) {
+                System.out.print("\033[H\033[2J");
                 DIFFICULTY();
                 continue;
             } else if (input.equals("3")) {
                 SCOREBOARD();
             } else {
                 //Om et finns en datatyp fel så kommer koden returnera uppot så att användaren lägger in korrekt input.
-                CLEARSCREEN();
+                clearScreen();
                 System.out.println(
                         "                                                                    !!PLEASE ENTER A VALID INPUT!!");
             }
@@ -63,7 +65,7 @@ public class DEMON_SLAYER_GAME {
     }
     
     static void DIFFICULTY(){
-        CLEARSCREEN();
+        clearScreen();
         while (true) {
             //Vi håller en while loop så att om det finns något fel så kan användaren returnera uppot och gå göra det igen. 
             System.out.println("WHAT DIFFICULTY DO YOU WANT?");
@@ -86,7 +88,7 @@ public class DEMON_SLAYER_GAME {
                 ATTACK(1.2,1.0 );
 
             } else {
-                CLEARSCREEN();
+                clearScreen();
                 System.out.println(
                         "                                                                    !!YOU ENTERD A INVALID INPUT!!");
                 continue;
@@ -96,13 +98,37 @@ public class DEMON_SLAYER_GAME {
             System.out.println("\nDIFFICULTY SET TO: " + difficulty);
             System.out.print("PRESS ENTER TO CONTINUE");
             input = sc.nextLine();
-            CLEARSCREEN();
+            clearScreen();
             break;
         }
         
     }
     static void BATTLE(){
-        
+        clearScreen();
+        //Måste alltid informera spelaren av dens mål och val genom hela spelet så att allting är förstårt och finns inget att fundera över.
+        System.out.println(
+                "---------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out
+                .println("                                                                                     INFO:");
+        System.out.println(
+                "                                                 WELCOME PLAYER, YOU HAVE ENTERED THE BATTLE ARENA WHERE YOU FIGHT UNTIL YOU DIE");
+        System.out.println(
+                "                                              EVERY ROUND YOU WILL FACE A NEW DEMON AND GET TO CHOSSE BETWEEN 3 ATTACKS TO KILL IT");
+        System.out.println(
+                "                                                 IF YOU SUCCESFULLY KILL THE DEMON YOU WILL BE REWARDED A AMOUNT OF HEALTH BACK");
+        System.out.println(
+                "                                                             THE LONGEST SURVIVING PLAYER IS THE ULTIMATE DEMON SLAYER ");
+        System.out.println(
+                "\n                                                                   PLEASE PRESS ENTER TO START YOUR BATTLE");
+        System.out.println(
+                "----------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        sc.nextLine();
+
+        clearScreen();
+        System.out.print("\n\nENTER YOUR PLAYERNAME: ");
+        playerName = sc.nextLine();
+        playerName_list.add(playerName);
+        clearScreen();
     }
     static void ATTACK(double enemyDiffficultyMultiplyer, double playerDifficultyMultiplier ){
         
@@ -115,7 +141,8 @@ public class DEMON_SLAYER_GAME {
     static void SCOREBOARD(){
         
     }
-    static void CLEARSCREEN(){
-        System.out.print("\033[H\033[2J");
+    static void clearScreen(){
+        System.out.println("\n\n\n\n\n\n\n");
     }
+	
 }
