@@ -28,7 +28,7 @@ public class DEMON_SLAYER_GAME {
     static Scanner sc = new Scanner(System.in);
      
     public static void main(String[] args) {
-        
+        GAMEMENU();
     }
     
     static void GAMEMENU(){
@@ -46,7 +46,7 @@ public class DEMON_SLAYER_GAME {
             String input = sc.nextLine();
             if (input.equals("1")) {
                 BATTLE();
-                ATTACK();
+                ATTACK(1.0, 1.2);
                 break;
             } else if (input.equals("2")) {
                 DIFFICULTY();
@@ -71,16 +71,19 @@ public class DEMON_SLAYER_GAME {
             System.out.println("[2] HARD");
             System.out.print("INPUT: ");
             String input = sc.nextLine();
-            //Jag anger variablerna till deras svårighetsnivå som kommer att pverka attack skadan.
+            /*Jag anger variablerna till deras svårighetsnivå som kommer att påverka attack skadan.
+            Genom att använda mig av parameter så skickar jag över datan från difficulty rakt in i attack metoden 
+            där dom kommer att användas av
+            */
             if (input.equals("1")) {
                 difficulty = "NORMAL";
-                enemyDiffficultyMultiplyer = 1;
-                playerDifficultyMultiplier = 1.2;
-
+                //Iden är då att när spelaren kör normal gör enemies deras normal skada medans spelaren får en 1.2x mer damage för att göra det en bit enklare.
+                ATTACK(1.0,1.2 );
+                
             } else if (input.equals("2")) {
                 difficulty = "HARD";
-                enemyDiffficultyMultiplyer = 1.2;
-                playerDifficultyMultiplier = 1;
+                // Dock är så har vi gjort det i motsat så att enemyn är starkare.
+                ATTACK(1.2,1.0 );
 
             } else {
                 CLEARSCREEN();
@@ -89,17 +92,21 @@ public class DEMON_SLAYER_GAME {
                 continue;
             }
             //Confirmation meddelande så att användaren känner isg alltid vid kontroll.
+            
             System.out.println("\nDIFFICULTY SET TO: " + difficulty);
             System.out.print("PRESS ENTER TO CONTINUE");
             input = sc.nextLine();
             CLEARSCREEN();
             break;
         }
+        
     }
     static void BATTLE(){
         
     }
-    static void ATTACK(){
+    static void ATTACK(double enemyDiffficultyMultiplyer, double playerDifficultyMultiplier ){
+        
+        
         
     }
     static void WEAPONSTATS(){
@@ -108,7 +115,7 @@ public class DEMON_SLAYER_GAME {
     static void SCOREBOARD(){
         
     }
-    public static void CLEARSCREEN(){
+    static void CLEARSCREEN(){
         System.out.print("\033[H\033[2J");
     }
 }
