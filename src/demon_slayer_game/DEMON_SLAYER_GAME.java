@@ -25,9 +25,36 @@ public class DEMON_SLAYER_GAME {
     public static void main(String[] args) {
         
     }
+    
     static void GAMEMENU(){
-        
+        boolean running = true;
+        System.out
+                .println("                                                                       DEMON SLAYER: BATTLE");
+        while (running) {
+            System.out.println("\tSTART MENU");
+            System.out.println("[1] BATTLE");
+            System.out.println("[2] DIFFICULTY");
+            System.out.println("[3] SCOREBOARD");
+            System.out.print("INPUT: ");
+
+            String input = sc.nextLine();
+            if (input.equals("1")) {
+                BATTLE();
+                ATTACK();
+                break;
+            } else if (input.equals("2")) {
+                DIFFICULTY();
+                continue;
+            } else if (input.equals("3")) {
+                SCOREBOARD();
+            } else {
+                CLEARSCREEN();
+                System.out.println(
+                        "                                                                    !!PLEASE ENTER A VALID INPUT!!");
+            }
+        }
     }
+    
     static void DIFFICULTY(){
         
     }
@@ -46,6 +73,4 @@ public class DEMON_SLAYER_GAME {
     public static void CLEARSCREEN(){
         System.out.print("\033[H\033[2J");
     }
-    
-    
 }
