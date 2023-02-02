@@ -131,7 +131,44 @@ public class DEMON_SLAYER_GAME {
         clearScreen();
     }
     static void ATTACK(double enemyDiffficultyMultiplyer, double playerDifficultyMultiplier ){
+        //Detta gör så att varje gång vi anroppar attack metoden kommer namnet på monstret byta namn
+        enemyNameListIndex++;
+        String enemyName = enemyNameList[enemyNameListIndex];
         
+        //Informerar användaren om rundan så att det alltid känns som att spelet är aktivt.
+        System.out.println("ROUND " + gameRound);
+        System.out.println(playerName + " VS " + enemyName);
+        System.out.println("LETS FIGHT!");
+
+        //Vi informerar spelaren om dens val. 
+        while (true) {
+            System.out.println("\nCHOSSE ACTION:");
+            System.out.println("[1] ATTACK");
+            System.out.println("[2] WEAPON STATS");
+            System.out.println("[3] EXIT");
+            System.out.print("INPUT: ");
+            /*
+            Vi tar in inputen av användaren och checkar dens innehåll, så om det står antligen 1, 2, eller 3 så görs det som det ska hända.
+            Om du inte anger korrekt input så informerr vi användaren och lägger en continue;, som skickar nvändren tillbaks upp i koden där den kan 
+            genomföra valet igen men ange rätt input.
+            */
+            String input = sc.nextLine();
+            if (input.equals("1")) {
+                clearScreen();
+                break;
+            } else if (input.equals("2")) {
+                WEAPONSTATS();
+            } else if (input.equals("3")) {
+                totalPlayerKills += playerKills;
+                kills.add(totalPlayerKills);
+                main(enemyNameList);
+            } else {
+                clearScreen();
+                System.out.println(
+                        "                                                                    !!YOU ENTERD A INVALID INPUT!!");
+                continue;
+            }
+        }
         
         
     }
