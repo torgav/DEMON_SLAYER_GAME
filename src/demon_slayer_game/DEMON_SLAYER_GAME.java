@@ -8,13 +8,15 @@ public class DEMON_SLAYER_GAME{
     // Spel variabler
     static Scanner sc = new Scanner(System.in);
     static boolean running = true;
+    static String difficulty = "NORMAL";
     
     // Spelar variabler
     static ArrayList<String> playerNameList = new ArrayList<String>();
     static ArrayList<Integer> playerKillList = new ArrayList<Integer>();
+    static double playerDifficultyMultiplier = 1.2;
    
     // Fiende variablar
-    
+    static double  enemyDiffficultyMultiplyer = 1.0;
     public static void main(String[] args){
         //En simpel main som är kärnan av spelet.
         clearScreen();
@@ -57,13 +59,71 @@ public class DEMON_SLAYER_GAME{
         
     }
     
-    static void difficulty(){
-        
-    }
-    
     static void scoreboard(){
         
     }
+    
+    static void difficulty(){
+        clearScreen();
+        while(true) {
+            System.out.println("WHAT DIFFICULTY DO YOU WANT?");
+            System.out.println("[1] NORMAL");
+            System.out.println("[2] HARD");
+            System.out.print("INPUT: ");
+            String input = sc.nextLine();
+            //Vi läser in användarens input och utför det dom väljer
+            if (input.equals("1")) {
+                // I normal mode så kommer skadan för fienden x med 1 så ingen skillnad medans spelaren får en x 1.1 på sin attack.
+                difficulty = "NORMAL";
+                enemyDiffficultyMultiplyer = 1;
+                playerDifficultyMultiplier = 1.1;
+            } else if (input.equals("2")) {
+                //Och åt andra hålet för hårt dock fienden får en bit extra för att hålla det intressant.
+                difficulty = "HARD";
+                enemyDiffficultyMultiplyer = 1.2;
+                playerDifficultyMultiplier = 1;
+            } else {
+                //Själklart om användaren inte läger in rätt input så säger vi till hen och låter de köra om.
+                clearScreen();
+                System.out.println("                                                                    !!YOU ENTERD A INVALID INPUT!!");
+                continue;
+            }
+            //En liten konfirmation som jag tyckte va coolt att ha för design och för att användaren ska veta extra nogrant om vad om har valt.
+            System.out.println("\nDIFFICULTY SET TO: " + difficulty);
+            System.out.print("PRESS ENTER TO CONTINUE");
+            input = sc.nextLine();
+            clearScreen();
+            break;
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     static void weaponStats(){
         //Programet informerar användaren så att de kan strategis använda sina attacker.
@@ -106,9 +166,6 @@ public class DEMON_SLAYER_GAME{
         // Detta är för att hålla consolen en bit ren och inte överflödda med text.
         System.out.println("\n\n\n\n");
     }
-    
-    
-    
 }
 
 
