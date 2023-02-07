@@ -171,9 +171,110 @@ public class DEMON_SLAYER_GAME{
     }
     
     static int playerAttack(int enemyHealth, String enemyName){
-        weaponStats();
+        while(true){
+            //playerAttack variables
+            int randomNum = (int) (Math.random() * 1001);
+            int playerMove;
+            int playerAttackDamage = 0;
+
+            //Player attack choice
+            System.out.println("\nCHOSSE YOUR ATTACK:");
+            System.out.println("[1] LITE ATTACK       [2] NORMAL ATTACK       [3] HEAVY ATTACK");
+            System.out.print("INPUT:");
+
+            //try ctach to prevent any errors occuring if the player inputs the wrong type of data.
+            try {
+                String input = sc.nextLine();
+                playerMove = Integer.parseInt(input);
+                clearScreen();
+            } catch (Exception e) {
+                clearScreen();
+                System.out.println(
+                        "                                                                    !!YOU ENTERD A INVALID INPUT!!");
+                continue;
+            }
+            clearScreen();
+            
+            //Jag andvänder en switch case för att ta in de bestämde inputsen.
+            switch (playerMove) {
+                case 1:
+                    System.out.println("YOU CHOSSE: LITE ATTACK");
+                    //Med random num så har jag gjort det i procent med decimaler för att skapa chanserna av attackerna.
+                    //Att träffa för denna attack så har du 75% chans att träffa
+                    if (randomNum < 750) {
+                        //För att kalkylera skadan så sätter jag 15 för standard skadan och gångrar det med svårighets faktorn som kan öka skadan.
+                        //Vi skriver int framför föratt om produkten vlir en decimal så gör vi om den till en int, alltså en typ konvertering.
+                        playerAttackDamage = (int) (15 * playerDifficultyMultiplier);
+                        System.out.println("YOU DEALT: " + playerAttackDamage + " DAMAGE");
+                        break;
+                    } else if (randomNum >= 750 && randomNum <= 850) {
+                        //I denna finns det 10% chans att missa
+                        playerAttackDamage = 0;
+                        System.out.println("YOUR ATTACK MISSED");
+                        break;
+                    } else if (randomNum > 850) {
+                        //och i denna finns det en  15% chans för att få en crit chans.
+                        //Då gör vi standrad skadan större och gångrar den med svårighets.
+                        playerAttackDamage = (int) Math.ceil(22.5 * playerDifficultyMultiplier);
+                        System.out.println("YOU GOT A CRIT! YOU DEALT: " + playerAttackDamage + " DAMAGE");
+                        break;
+                    }
+                case 2:
+                    System.out.println("YOU CHOSSE: NORMAL ATTACK");
+                    //Här finns det en 65% chans att träffa 
+                    //Också samma förklaring för allt här.
+                    if (randomNum < 650) {
+                        playerAttackDamage = (int) (30 * playerDifficultyMultiplier);
+                        System.out.println("YOU DEALT: " + playerAttackDamage + " DAMAGE");
+                        break;
+                    } else if (randomNum >= 650 && randomNum <= 950) {
+                        //30%
+                        playerAttackDamage = 0;
+                        System.out.println("YOUR ATTACK MISSED");
+                        break;
+                    } else if (randomNum > 950) {
+                        //5%
+                        playerAttackDamage = (int) Math.ceil(45 * playerDifficultyMultiplier);
+                        System.out.println("YOU GOT A CRIT! YOU DEALT: " + playerAttackDamage + " DAMAGE");
+                        break;
+                    }
+                case 3:
+                    System.out.println("YOU CHOSSE: HEAVY ATTACK");
+                    if (randomNum < 275) {
+                        //27.5%
+                        playerAttackDamage = (int) (45 * playerDifficultyMultiplier);
+                        System.out.println("YOU DEALT: " + playerAttackDamage + " DAMAGE");
+                        break;
+                    } else if (randomNum >= 275 && randomNum <= 975) {
+                        //70%
+                        playerAttackDamage = 0;
+                        System.out.println("YOUR ATTACK MISSED");
+                        break;
+                    } else if (randomNum > 975) {
+                        //2.5%
+                        playerAttackDamage = (int) Math.ceil(67.5 * playerDifficultyMultiplier);
+                        System.out.println("YOU GOT A CRIT! YOU DEALT: " + playerAttackDamage + " DAMAGE");
+                    }
+                    break;
+                default:
+                    //Detta är en till typfel om användaren i början skriver in ett nummer men det är inte skriven i denna switch case så 
+                    //kommer andvändraen få en fel meddelande och försöka igen.
+                    clearScreen();
+                    System.out.println(
+                            "                                                                    !!YOU ENTERD A INVALID INPUT!!");
+                    continue;
+            }
+            //Ändrar hälsan på enemy 
+            enemyHealth = enemyHealth - playerAttackDamage;
+            //Detta stoppar att hp ska gå minus som ser vara dåligt ut så vi kollar vilket nummer är större och läger den i variabeln.
+            enemyHealth = Math.max(0, enemyHealth);
+
+            System.out.println(enemyName + "'s health is now: " + enemyHealth + "\n");
+            break;
+        }
+        return enemyHealth;
         
-        return 0;
+       
     }
     
     static int enemyAttack(int playerHealth, String enemyName){
