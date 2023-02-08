@@ -11,8 +11,8 @@ public class DEMON_SLAYER_GAME{
     static String difficulty = "NORMAL";
     
     // Spelar variabler
-    static ArrayList<String> playerNameList = new ArrayList<String>();
-    static ArrayList<Integer> playerKillList = new ArrayList<Integer>();
+    static ArrayList<String> playerNameList = new ArrayList<>();
+    static ArrayList<Integer> playerKillList = new ArrayList<>();
     static double playerDifficultyMultiplier = 1.2;
    
     // Fiende variablar
@@ -103,7 +103,6 @@ public class DEMON_SLAYER_GAME{
                     clearScreen();
                     System.out.println(
                             "                                                                    !!YOU ENTERD A INVALID INPUT!!");
-                    continue;
                 }
             }   
 
@@ -116,7 +115,7 @@ public class DEMON_SLAYER_GAME{
                     System.out.println("!!YOU DEFETED " + enemyName + "!!");
                     playerKills++;
                     //Beroende på svårigehst nivån som var vald så ger vi tillbaka ett viss anatl hälsa.
-                    if (difficulty == "HARD") {
+                    if ("HARD".equals(difficulty)) {
                         playerHealth = (int) Math.ceil(playerHealth + totalEnemyDamage * 0.85);
                     } else {
                         playerHealth = (int) Math.ceil(playerHealth + totalEnemyDamage * 0.75);
@@ -273,12 +272,79 @@ public class DEMON_SLAYER_GAME{
             break;
         }
         return enemyHealth;
-        
-       
     }
     
     static int enemyAttack(int playerHealth, String enemyName){
-        return 0;
+        //Denna radom tar ett nummer mellan 1-3 de motsvara attackerna
+       int enemyMove = (int) (Math.random() * (2) + 1);
+       // Och denna random väljer chanserna unom attckerna.
+        int randomNum = (int) (Math.random() * 1001);
+        int enemyAttackDamage = 0;
+
+        //Hela enemy systemet är exakt lika dan som playerhealth ddock med dens egna variabler.
+        while(true){
+            switch (enemyMove) {
+                case 1:
+                    System.out.println(enemyName + " CHOSSE: LITE ATTACK");
+                    if (randomNum < 750) {
+                        enemyAttackDamage = (int) (15 * enemyDiffficultyMultiplyer);
+                        //Vi kalkylerar också total damagen runt hela rundan för att betsäma åter hälsan man får när den dör.   
+                        totalEnemyDamage += enemyAttackDamage;
+                        System.out.println(enemyName + " DEALT: " + enemyAttackDamage + " DAMAGE");
+                        break;
+                    } else if (randomNum >= 750 && randomNum <= 850) {
+                        enemyAttackDamage = 0;
+                        System.out.println(enemyName + "'s ATTACK MISSED");
+                        break;
+                    } else if (randomNum > 850) {
+                        enemyAttackDamage = (int) (22.5 * enemyDiffficultyMultiplyer);
+                        totalEnemyDamage += enemyAttackDamage;
+                        System.out.println(enemyName + " GOT A CRIT! IT DEALT: " + enemyAttackDamage + " DAMAGE");
+                        break;
+                    }
+                case 2:
+                    System.out.println(enemyName + " CHOSSE: NORMAL ATTACK");
+                    if (randomNum < 650) {
+                        enemyAttackDamage = (int) (30 * enemyDiffficultyMultiplyer);
+                        totalEnemyDamage += enemyAttackDamage;
+                        System.out.println(enemyName + " DEALT: " + enemyAttackDamage + " DAMAGE");
+                        break;
+                    } else if (randomNum >= 650 && randomNum <= 950) {
+                        enemyAttackDamage = 0;
+                        System.out.println(enemyName + "'s ATTACK MISSED");
+                        break;
+                    } else if (randomNum > 950) {
+                        enemyAttackDamage = (int) (45 * enemyDiffficultyMultiplyer);
+                        totalEnemyDamage += enemyAttackDamage;
+                        System.out.println(enemyName + " GOT A CRIT! IT DEALT: " + enemyAttackDamage + " DAMAGE");
+                        break;
+                    }
+                case 3:
+                    System.out.println(enemyName + " CHOSSE: HEAVY ATTACK");
+                    if (randomNum < 275) {
+                        enemyAttackDamage = (int) (45 * enemyDiffficultyMultiplyer);
+                        totalEnemyDamage += enemyAttackDamage;
+                        System.out.println(enemyName + " DEALT: " + enemyAttackDamage + " DAMAGE");
+                        break;
+                    } else if (randomNum > 270 && randomNum <= 975) {
+                        enemyAttackDamage = 0;
+                        totalEnemyDamage += enemyAttackDamage;
+                        System.out.println(enemyName + "'s ATTACK MISSED");
+                        break;
+                    } else if (randomNum > 975) {
+                        enemyAttackDamage = (int) (67.5 * enemyDiffficultyMultiplyer);
+                        totalEnemyDamage += enemyAttackDamage;
+                        System.out.println(enemyName + " GOT A CRIT! IT DEALT: " + enemyAttackDamage + " DAMAGE");
+                    }
+                    break;
+                default:
+                    continue;
+            }
+            playerHealth = playerHealth - enemyAttackDamage;
+            playerHealth = Math.max(0, playerHealth);
+            break;
+        }
+        return playerHealth;
     }
     
     
