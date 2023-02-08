@@ -351,7 +351,49 @@ public class DEMON_SLAYER_GAME{
     
    
     static void scoreboard(){
-        
+        clearScreen();
+        System.out.println("\tSCOREBOARD");
+        try{
+            /*
+             Denna sortering algoritm jämför varje par av element i listan och byter plats på dem om de är i fel ordning. 
+            Det upprepas tills hela listan är sorterad i stigande ordning enligt antal dödade fiender.
+            */
+            while (true) {
+                for (int k = 0; k < playerKillList.size(); k++) {
+                    for (int j = k + 1; j < playerKillList.size(); j++) {
+                        if (playerKillList.get(k) < playerKillList.get(j)) {
+                            int temp = playerKillList.get(k);
+                            playerKillList.set(k, playerKillList.get(j));
+                            playerKillList.set(j, temp);
+
+                            String tempName = playerNameList.get(k);
+                            playerNameList.set(k, playerNameList.get(j));
+                            playerNameList.set(j, tempName);
+                        }
+                    }
+                }
+                //Sedan så printar vi ut listan som är sorterad och på det sätte är det en funktionerande scoreboard.
+                System.out.print("\n");
+                for (int a = 0; a < playerNameList.size(); a++) {
+                    System.out.print("Player: " + playerNameList.get(a) + "   Kills: " + playerKillList.get(a) + "\n");
+                }
+                break;
+            }
+        }catch (Exception e){
+
+        }
+        try{
+            //Om ingen har kört så kommer det stå såhär för att hålla det informativ och rent.
+            if(playerKillList.get(0) == 0){
+                System.out.println("\nNO DATA FOUND");
+            }
+        }catch (Exception e){
+            System.out.println("       NO DATA FOUND");
+        }
+            System.out.print("\nPRESS ENTER TO RETURN TO MENU");
+            sc.nextLine();
+            clearScreen();
+            main(null);
     }
     
     static void difficulty(){
